@@ -7,6 +7,8 @@ assignees: ''
 
 ---
 
+To be a valid bug report, and to receive prompt turn around time for solving this, you must fill out all sections not marked optional.
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
@@ -27,7 +29,7 @@ You must include screenshots of:
 
 **Version(please complete the following information):**
  - Unity Version:
- -DragonPack Version:
+ - DragonPack Version:
 
-**Additional context**
+**Optional: Additional context**
 Add any other context about the problem here.
