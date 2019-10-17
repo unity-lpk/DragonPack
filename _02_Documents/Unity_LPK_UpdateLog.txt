@@ -1,0 +1,673 @@
+--------------------------------------------------------------------------------
+Version 2.0.5 7/24/19 - 4:00 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Removed project settings from being deployed with Unity LPK.
+-Reworked LPK_ModifyCounterOnEvent to only work with a single counter, instead of an array.
+-Reworked LPK_TrackingCamera's interface to be much easier to use.
+-Work in progress implementation for dispatching events to only certain components - subject to removal.
+
+--------------------------------------------------------------------------------
+Version 2.0.4 7/22/19 - 12:52 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Added ability for LPK_TrackingCamera to print out a list of all game objects being tracked via Print Debug flag.
+-Modified LPK_DispatchOnCollision to detect direct game objects instead of names.
+-Modified LPK_ModifySpriteOnEvent to use the term "sprite" instead of "texture" where appropriate.
+-Modified inspector of LPK_FollowGameObject to only show some properties when they become relevant.
+-Reworded LPK_TrackingCameraObject tracking type property Tooltip to be clearer in purpose.
+-Removed ability for the LPK_TrackingCamera to only track a subset of game objects with LPK_TrackingCameraObject on them via tag selection.
+
+--------------------------------------------------------------------------------
+Version 2.0.3 7/17/19 - 11:00 AM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed bug with inspector for LPK_DispatchOnCollision.
+
+--------------------------------------------------------------------------------
+Version 2.0.2 7/10/19 - 5:50 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed missing debug properties on some LPK Components.
+-Fixed various typos.
+-Fixed LPK_Counter not clamping the minimum value.
+-Fixed LPK_Counter not dispatching the minimum and maximum events.
+-Fixed bug preventing use of LPK_FollowGameObject.
+-Fixed strange requirements for LPK_DispatchOnCollision.
+-Removed extra LPK_EventObject from the menu.
+-LPK_EventObjects now default to being sent to all game objects instead of the owner game object.
+
+--------------------------------------------------------------------------------
+Version 2.0.1 6/10/19 - 7:55 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed crash bug in event system when electing to not send an event.
+-Fixed post processing shaders not compiling.
+-Fixed LPK_CameraShaderEnabler not showing up in the inspector correctly.
+
+--------------------------------------------------------------------------------
+Version 2.0.0  5/23/19 - 1:40 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Upgraded LPK to Unity 2018.3.14
+-Event system has been completly reworked to allow more user customization.
+-Added LPK_DispatchOnCollision.
+-Added LPK_DispatchOnVisability.
+-Added LPK_MultiTagManager to allow multiple tags on a single game object.
+-Added more options to LPK_DispatchOnMouseInput.
+-Added "Notes" property to all LPK components to leave information in the inspector only about a component's use.
+-Added "OnHitMax" event to LPK_Counter.
+-Added "OnHitMin" event to LPK_Counter.
+-Added ability to detect if cheats were ever enabled in gameplay.
+-Added "delete" command to LPK_Console
+-Improved array drawing inside of inspectors.
+-Improved functionality of LPK_AgressivePathFollower tag detection.
+-Fixed typo in LPK_SpawnOnEvent.
+-Adjusted LPK_ModifyScriptActiveState to support Animator components.
+-Adjusted internal implementation of LPK_RotateTowardsGameObject.
+-Adjusted shaders to have local instead of global properties.
+-Adjusted layout of LPK_DeveloperConsole
+-Moved all new menu windows under LPK toolbar.
+-Removed LPK_AnalyticsInput
+-Removed LPK_ChangeMouseSprite.
+-Removed LPK_HideMouseSprite.
+-Removed LPK_GravityEffect.
+-Removed LPK_DifficultyManager.
+-Removed LPK_DifficultyManagerIndicator.
+-Removed LPK_ModifyAnimatorActiveState.
+-Removed LPK_FeedbackManager.
+-Removed LPK_Team.
+-Removed LPK_DebugStatistics
+-Removed LPK_CameraLetterbox
+-Removed LPK_Health
+-Removed LPK_ModifyHealthOnEvent
+-Removed LPK_Lives
+-Removed LPK_ModifyLivesOnEvent
+-Removed LPK_FollowMouse.
+-Removed LPK_RotateTowardsMouse.
+-Removed LPK_ReplaceOnEvent.
+-Removed LPK_ShootAtMouse.
+-Removed LPK_ModifyHealthOnCollision.
+-Removed LPK_ModifyFilmGrainOnEvent.
+-Removed LPK_FilmGrainManager.
+-Removed LPK_ModifyChromaticAberrationOnEvent.
+-Removed LPK_ChromaticAbberationManager.
+-Removed LPK_ModifyColorSaturationOnEvent.
+-Removed LPK_ColorSaturationManager.
+-Removed LPK_ModifyVignetteOnEvent.
+-Removed LPK_VignetteManager.
+
+--------------------------------------------------------------------------------
+Version 1.3.1  5/1/19 - 5:30 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Integrated TextMesh Pro into the LPK.
+-Added DigiPen logo to the ProjectSettings player splash screens.
+-Added event sending mode for per-component/script basis.
+-Added Developer Console which will automatically appear if using any LPK classes with the following commmands:
+  -clear
+  -print_console
+  -print_current_scene_name
+  -print_fps
+  -print_scene_list
+  -quit
+  -restart
+  -toggle_cheats
+  -load_next_scene
+  -load_previous_scene
+  -load_scene
+  -noclip
+  -pacifist
+-Fixed typo in event specifier text.
+-Fixed bug causing collision events to never be considered valid due to new event system.
+-Renamed event infos to event specifiers for further clarity of use.
+-Renamed LPK_RotateTowardsObject to LPK_RotateTowardsGameObject.
+-Changed hotkey of select with specifiers in the editor to alt + s instead of shift + s.
+
+--------------------------------------------------------------------------------
+Version 1.3.0  4/30/19 - 1:30 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Consolidated BETA branch into default LPK package.
+-Added slider support to LPK_VolumeManager.
+-Added warnings when undefined behavior may occur with FindGameObjectWithTag (enabled with Print Debug info).
+-Reworked how event connections are set up in core event system for more user clarity.
+-Fixed bug causing LPK_ModifyHealthOnCollision to not function.
+-Fixed bug in core event system collision checking.
+-Fixed typo in LPK_TextDisplay.
+-Fixed core event system bug not checking != on line 1496 in LPK_Utilities.
+-Fixed inconsistency with LPK_DestroyOnEvent default behavior.
+-Fixed inconsistency with LPK_ModifyGameObjectActiveState default behavior.
+-Fixed crash bug in LPK_DifficultyManager.
+
+--------------------------------------------------------------------------------
+BETA Version 1.2.10  4/10/19 - 5:20 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Added ability to make animated counters via LPK_TextDisplay.
+-Added functionality to spawn an object at random angles to LPK_SpawnOnEvent.
+-Added LPK_SpawnRandomOnEvent.
+-Added library of 6 demo particle effect to LPK_Graphics package.
+-Added LPK_FishEyeLens shader.
+-Added LPK_WorldSpaceTexture shader.
+-Improved editor interface for sub-category headers.
+-Improved editor interface for collision and input events.
+-Removed comma seperators in LPK_TextDisplay.
+-Fixed LPK_MagneticField visualizer not displaying.
+-Fixed core engine bug with detecting collision specifiers.
+-Modified LPK_DynamicPlatformController to allow for capsule colliders.
+
+--------------------------------------------------------------------------------
+BETA Version 1.2.9  4/5/19 - 8:00 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Added LPK_ScrollTexture shader.
+-Added .svn and .git ignore files for general Untiy usage in source control.
+-Renamed varaible in LPK_SetInitialVelocity to match prior documentation.
+-Reworked LPK_BarDisplay to be much simplier to set up.
+-Reworked LPK_DestroyOnEvent and LPK_LogicBase to solve a frame delay issue.
+
+--------------------------------------------------------------------------------
+BETA Version 1.2.8  4/2/19 - 11:45 AM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Added LPK_ModifyHealthOnCollision.
+-Added LPK_ActivateOnStart.
+-Added support to use LPK_GradientAnimator support with UI buttons.
+-Split shaders into two unique folders for clarity of use.
+-Optimization pass to improve perfermance on LPK components.
+-Fixed bugs in trigger exit detection within LPK_LogicBase.
+-Modified how internal functionaltiy of LPK_DestroyOnEvent works.
+
+--------------------------------------------------------------------------------
+BETA Version 1.2.7  3/29/19 - 3:35 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed bug in LPK_Counter when adding values.
+-Fixed bug in LPK_DynamicPlatformController not handling right input correctly.
+-Perfermance upgrade by about 5%.
+-Updated project settings for correctly configured inputs.
+
+--------------------------------------------------------------------------------
+BETA Version 1.2.6  3/29/19 - 11:10 AM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Added LPK_SpriteOutline shader.
+-Added LPK_ColorSaturation shader.
+-Added LPK_ColorSaturationManager.
+-Added LPK_ModifyColorSaturationOnEvent.
+-Added LPK_ChromaticAbberation shader.
+-Added LPK_ChromaticAbberationManager.
+-Added LPK_ModifyChromaticAberrationOnEvent.
+-Added ability to modify materials through LPK_ModifySpriteOnEvent.
+-Removed unncessary files from Shader folder.
+-Renamed LPK_VibrateController to LPK_VibrateControllerOnEvent.
+-Improved defaulting behavior on LPK_DestroyOnEvent.
+-Improved perfermance by ~35% within LPK_LogicBase's Start function.
+-Reworked LPK_Counter algorithm to be more user friendly for custom components that wish to make use of data from the counter.
+-Fixed a bug in LPK_ObjectDisplay placing created objects at the wrong position.
+-Fixed a bug that could allow for controller vibration to go on indefinently if the object managing the vibration was destroyed.
+-Fixed a bug in LPK_Timer when set to CountUp and receiving multiple events.
+
+--------------------------------------------------------------------------------
+BETA Version 1.2.5  3/25/19 - 6:10 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Upgraded LPK_PrintDebug functions to give more data to user.
+-Added more error checking for data validation.
+-Added LPK_ScreenSpaceRefractions.
+-Added LPK_FilmGrain manager.
+-Added LPK_ModifyFilmGrainOnEvent.
+-Added LPK_VignetteManager.
+-Added LPK_ModifyVignetteOnEvent.
+-Added rotation speed control to LPK_RotateTowardsGameObject.
+-Added rotation speed control to LPK_RotateTowardsMouse.
+-Added five normal maps for particle circle sprites for use with LPK_ScreenSpaceRefractions.
+-Added new shader LPK_ScreenRefract.
+-Reworked shader functionality for LPK_FilmGrain.
+-Reworked shader functionality for LPK_Vignette.
+-Fixed tiling issue with LPK_Heatwave texture.
+-Fixed bug causing distance setting to not be used in LPK_DispatchOnLineOfSight.
+-Reworded the name of an event for clarity of use.
+
+--------------------------------------------------------------------------------
+LEGACY Version 1.1.27  3/25/19 - 10:55 AM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Added rotation speed control to LPK_RotateTowardsMouse.
+-Added rotation speed control to LPK_RotateTowardsGameObject.
+-Fixed bug in LPK_VelocityTowardsGameObject causing the OnlyOnce flag to be irrelevant.
+-Fixed bug in LPK_DispatchOnLineOfSight that caused the distance variable to be ignored.
+
+--------------------------------------------------------------------------------
+BETA Version 1.2.4  3/22/19 - 11:40 AM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Added additional support to LPK_ShakeOnEvent.
+-Removed unused variables from LPK_CameraLetterbox.
+-Reworked input for the three character controller scripts.
+-Fixed a bug with LPK_SpawnOnEvent dispatching.
+
+--------------------------------------------------------------------------------
+BETA Version 1.2.3  3/20/19 - 12:25 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Core System: FixedUpdate within LPK components is now no longer supported.  Use OnFixedUpdate instead.
+-Added LPK_VelocityClamp.
+-Added LPK_RadialDisplay.
+-Added LPK_CameraLetterbox.
+-Added GetAllGameObjectsByLayer in LPK_LogicBase for utility usage.
+-Fixed a bug within LPK_Counter causing incorrect displaying under certain circumstance.
+-Fixed a bug with data validation in LPK_BarDisplay.
+-Editor: Added Layer Dropdown attribute.
+-Editor: Added LPK_ScaleSnappingSize.
+-Editor: Added LPK_Notepad.
+-Editor: Added LPK_SelectBySpecifiers.
+-Editor: Added LPK_SupportLauncher.
+-Modified LPK_DebugObjectStatistics to track FixedUpdate components.
+-Modified all LPK Character Controllers to use axes instead of indivitual buttons.
+
+--------------------------------------------------------------------------------
+LEGACY Version 1.2.6  3/20/19 - 11:52 AM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed core system bug with collision event detection.
+-Fixed unused variable in LPK_VelocityTowardsGameObject.
+-Fixed "buggy" movement in LPK_FollowObject.
+-Fixed "buggy" movement in LPK_FollowMouse.
+-Fixed "buggy" movement in LPK_TrackingCamera.
+-Fixed a bug that caused LPK_TrackingCamera to stop working if there were no more objects in the scene to track.
+-Added data validation to events that depend on passed information.
+-Added TagDropdown attribute to all tag fields.
+-Added SceneDropdown to all scene fields.
+-Added LPK_Notepad.
+-Added LPK_ScaleSnappingSize.
+-Added LPK_SelectBySpecifiers.
+-Added LPK_SupportLauncher.
+
+--------------------------------------------------------------------------------
+BETA Version 1.2.2  3/15/19 - 6:45 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Added additional features to LPK_ObjectDisplay.
+-Added support for UI text on LPK_GradientAnimator.
+-Added custom property drawers for LPK sub-classes.
+-Added tag support to LPK_ModifySpriteOnEvent.
+-Added tag support to LPK_ModifyTextOnEvent.
+-Added tag support to LPK_ModifyRigidbody2DOnEvent.
+-Added start on spawn support to LPK_ModifySpriteOnEvent.
+-Added start on spawn support to LPK_ModifyTextOnEvent.
+-Added start on spawn support to LPK_ModifyRigidbody2DOnEvent.
+-Added safety checks to some LPK components that pass data through the event system.
+-Fixed a bug that caused LPK_TrackingCamera to stop working if there were no more objects in the scene to track.
+-Fixed a bug in object spawning in LPK_ReplaceOnEvent.
+-Fixed major system bug with collision, visibility, and mouse event sending when used multiple times on the same object.
+-Fixed bug with LPK_ShakeOnEvent.
+
+--------------------------------------------------------------------------------
+BETA Version 1.2.1  3/11/19 - 4:50 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Added LPK_ReplaceOnEvent.
+-Added LPK_ModifyRigidbody2DOnEvent.
+-Added ability to increase and decrease lives, instead of only decrease.
+-Added ability to destroy and spawn tracking cameras safely at run time.
+-Added OnSpawn functionality for LPK_ModifyHealthOnEvent.
+-Fixed LPK_DynamicTopDownRotationController not using dt for rotation.
+-Fixed components not using FixedUpdate when modifying transform values.
+-Fixed core system bug with collision event detection.
+-Editor: Added tag visualizer attribute.
+-Editor: Added scene visualizer attribute.
+-Editor: Added dynamic property hiding.
+-Fixed bad inspector name in LPK_DynamicTopDownRotationController.
+-Fixed event sending bug in LPK_ModifySpriteOnEvent.
+-Fixed event sending bug in LPK_modifyTextOnEvent.
+-Fixed event sending bug in LPK_SpawnOnEvent.
+
+--------------------------------------------------------------------------------
+BETA Version 1.2.0  3/8/19 - 11:45 AM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Added custom inspectors for all LPK classes.
+-Added LPK_FadeSoundOnEvent.
+-Added ability to vary pitch and volume on sounds via LPK_PlaySoundOnEvent.
+-Added tag support and multiple object support to LPK_ModifyText.
+-Added tag support and multiple object support to LPK_ModifySprite.
+-Added tag support and multiple object support to LPK_ModifyTransformOnEvent.
+-Added ability to specify whether the X velocity should be decreased while jumping in LPK_DynamicPlatformController.
+-Added toggle options to character controllers via events.
+-Added ability to limit air jump movement seperate from jump movement in LPK_DynamicPlatformController.
+-All LPK classes are now wrapped in the LPK namespace.
+-Removed unncessary public variable in LPK_FollowMouse.
+-Removed unncessary property in LPK_Lives.
+-Removed dependency on a Sprite Renderer in LPK_DynamicPlatformController.
+-Fixed a bug that allowed for unlimited air jumps in LPK_DynamicPlatformController.
+-Fixed velocity clamp in LPK_DynamicPlatformController.
+-Fixed bug causing objects to go in opposite direction when using LPK_VeloictyEffect.
+-Fixed unused variable in LPK_VelocityTowardsGameObject.
+-Fixed various typos and reworded some things in tooltips.
+-LPK_ExitGameOnEvent now will stop an editor session as well as a buld session.
+-Improved rotation control on LPK_DynamicTopDownOrthoganalController.
+
+--------------------------------------------------------------------------------
+Version 1.1.25  3/1/19 - 5:58 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed bug in LPK_ModifyTransformOnEvent not detecting objects with tags when original object is deleted.
+-Fixed trigger colliders not getting detected in LPK_Team.
+-Removed depricated property from LPK_Health.
+-Removed incorrect DT values in LPK_InitialVelocity and LPK_InitialAngularVelocity.
+-Fixed bug with LPK_ObjectDisplay not removing objects as would be expected.
+-Added LPK_FeedbackManager (for GAT 250).
+-Added LPK_Analytics classes to asssit with gathering playtest data.
+
+--------------------------------------------------------------------------------
+Version 1.1.24  2/27/19 - 11:55 AM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed a small bug that could occur with collision detection from the previous version changes.
+-Added more functionality to LPK_SpawnOnEvent.
+
+--------------------------------------------------------------------------------
+Version 1.1.23  2/26/19 - 6:30 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed bug with no tag detection on LPK_MagneticField.
+-Fixed bug with no tag detection on LPK_WindEffect.
+-Fixed bug with movement speed in all controllers.
+-Fixed issue with spawned objects sometimes being destroyed on the frame they are created.
+-Added LPK_EventRelay.
+
+--------------------------------------------------------------------------------
+Version 1.1.22  2/25/19 - 2:40 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-LPK_DynamicTopDownOrthoganalController now uses delta time.
+-LPK_DynamicTopDownRotationController now uses delta time.
+-LPK_DynamicPlatformController now uses delta time.
+-Added more informative debug prompts to LPK character controllers.
+-Fixed bad debug prompt in LPK_Counter
+-Added Counter Increase event.
+-Added Counter Decrease event.
+-Added LPK_VelcoityTowardsObject.
+-Added multiple tag support to LPK_MagneticField.
+-Added multiple tag support to LPK_WindEffect.
+
+
+--------------------------------------------------------------------------------
+Version 1.1.21  2/22/19 - 4:40 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed bad print statement in LPK_Lives
+-Fixed PNodes inspector name in LPK_PathFollower.
+-Added tag support to LPK_DetachOnEvent.
+-Added default behavior to LPK_DetachOnEvent.
+-Added tag support to LPK_AttachOnEvent.
+-Added default behavior to LPK_AttachOnEvent.
+-Added spawn on start functionality to LPK_SpawnOnEvent.
+-Fixed issue with events being detected on deactived scripts.
+
+--------------------------------------------------------------------------------
+Version 1.1.20  2/20/19 - 12:07 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Added ability to specify virtual buttons to detect input from on the base class.
+
+--------------------------------------------------------------------------------
+Version 1.1.19  2/19/19 - 4:50 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed new sprites that were not set to use 64*64 pixels per unit scale.
+-Added LPK_FaceVelocity.
+-Added cooldown capability to LPK_ShootAtMouse.
+-Added a maximum counter to LPK_ShootAtMouse like LPK_SpawnOnEvent.
+-Added a maximum alive count to LPK_ShootAtMouse like LPK_SpawnOnEvent.
+-Added functionality to LPK_ModifyTransformOnEvent allowing the modification to happen on object spawn (useful for parentinig).
+-Added local/world modification capability on LPK_ModifyTransformOnEvent.
+-Clarified some variables on LPK_ModifyGameObjectPersistence.
+-Verified tag support for LPK_RotateTowardsObject.
+
+--------------------------------------------------------------------------------
+Version 1.1.18  2/15/19 - 11:55 AM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed missing inspector variables for LPK_DynamicPlatformController.
+-Fixed copy/paste error in LPK_ModifyTransformOnEvent.
+
+--------------------------------------------------------------------------------
+Version 1.1.17  2/14/19 - 11:25 AM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed LPK_VibrateController bad inspector names.
+-Added missing "Component Properties" header on LPK_ModifyHealthOnEvent.
+-Fixed bug in LPK_SpawnOnEvent that caused object spawning to stop when the maximum alive count was reached.
+-Fixed bug that caused controller vibration to go on indefinently if the source object was set to null.
+-Fixed bug that could cause controller vibration to persist after game or editor play stopping.
+-Fixed inspector naming event triggers "E Event Trigger" on occasion.
+-Added tag and array support to LPK_DestroyOnEvent
+-Added initial object setting support to LPK_FollowObject.
+-Added tag support to LPK_RotateTowardsObject.
+-Fixued issue with recent edtior tools causing game building to fail.
+
+--------------------------------------------------------------------------------
+Version 1.1.16  2/13/19 - 6:30 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed LPK_LoadSceneOnEvent to work with Unity version 2018.3.4
+-Set default behavior for LPK_StopSoundOnEvent
+-Set default behavior for LPK_PlaySoundOnEvent
+-LPK_StopSoundOnEvent can now work with tags, and affect multiple game objects.
+-LPK_PlaySoundOnEvent can now work with tags, and affect multiple game objects.
+-Added LPK_DebugObjectStatistics for perfermance debugging.
+-LPK_TrackingCamera now uses SmoothDamp instead of Lerp for better movement.
+-LPK_TransformAnimator can now apply changes to global or local translation.
+-LPK_TransformAnimator can now be set NOT to affect certain transform properties per each keyframe.
+-LPK_DynamicTopDownOrthoganalController can now be set to SNAP rotation to the looking direction.
+-Clarified how event dispatching works in some tooltips.
+
+--------------------------------------------------------------------------------
+Version 1.1.15  2/7/19 - 1:42 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed bug in LPK_TrackingCamera causing VIEWPORT LPK_TrackingCameraObjects to no longer be detected.
+-Fixed bug in LPK_TrackingCamera that caused zooming to no longer work.
+-Added LPK_ModifyGameObjectPersistence for keeping gameobjects between level loads.
+-Added LPK_ModifyAnimatorActiveState to modify the active state of animators (like spirtesheets).
+-Added ability to have LPK_FollowMouse interpelate to the desired position, rather than just snap there.
+-Added visualizer for LPK_MagneticField's radius.
+-Added the ability for the health component to be set to infinite (use -1)
+-Added LPK_DispatchOnAnimatorCycle for sending events when an animation finishes, or starts its next loop.
+-Added new align to grid command (Doug Zwick)
+
+--------------------------------------------------------------------------------
+Version 1.1.14  2/1/19 - 3:45 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-HOLD functionality for input is now back in LPK_DynamicPlatformController.
+-Removed LPK_DynamicPlatformController dependency on BoxColllider2D.
+-Input fields are now auto-filled with LPK Virtual buttons for all controllers.
+-Added in missing geometric shapes for sprites.
+-Fixed bad inspector names used by LPK_EventReceiver class.
+-Fixed bad inspector names used by LPK_AgressivePathFollower class.
+-Fixed some issues with LPK_DispatchOnKeyboard detecting mouse clicks.
+-Fixed issue with event for LPK_GradientAnimator not being receivable.
+-Fixed typo in LPK_Timer.
+-Added tag functionality to LPK_ModifyGameObjectActiveState.
+-LPK_TrackingCamera now has an offset property.
+-SFX has been removed from the code package (whoops!).
+-Added first LPK editor command (group objects) - Doug Zwick.
+
+--------------------------------------------------------------------------------
+Version 1.1.13  1/29/19 - 2:58 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Changed LPK_LineOfSight to be named LPK_DispatchOnLineOfSight for file naming consistency.
+-Added LPK_ControlParticlesOnEvent to allow easy modification of particle system active state.
+-Added library of controller icons for all platforms (Nintendo Switch, Steam, Kinect Gestures, XBox, etc.)
+-Fixed bug with detecting any keypress in LPK_DispatchOnKeyboard.
+-Restructured LPK to have files in LPK folders for easier merge with user-created assets.
+
+--------------------------------------------------------------------------------
+Version 1.1.12  1/25/19 - 5:50 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-LPK_TrackingCamera can now have its translation locked in either X and/or Y axis.
+-LPK_TrackingCamera can now be told which tags to watch for.  By default, all objects with LPK_TrackingCameraObject will be watched.
+-Fixed multiple bad labels.
+-Added tag support to LPK_ModifyTransformOnEvent
+-Added variance property to LPK_InitialVelocity.
+-Added new jump property on LPK_DynamicPlatformController for grace jumping (when falling off ledges).
+
+--------------------------------------------------------------------------------
+Version 1.1.11  1/25/19 - 12:20 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Added installation guide for Unity LPK.
+-Modified how event broadcasting works internally (LPK_Utilities).
+-Fixed bug in LPK_DynamicTopDownRotationController
+
+--------------------------------------------------------------------------------
+Version 1.1.10  1/24/19 - 4:40 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-LPK_DynamicPlatformController can now use any collider type (2D)
+-LPK_DynamicPlatformController no longer displays properties related to the HOLD input type.
+-LPK_Health now shows the health value changing in the inspector.
+-Trigger Feet colliders now work for FEET grounded check.
+-Fixed oversight with visibility detection.
+-LPK_ModifyTransformOnEvent now defaults the copy objects to the owner gameobjects.
+-LPK_ModifyHealthOnEvent now uses the Set values as offsets if the mode on any of the properties is set to COPY.
+-LPK_Timer variance property now named appropriatly.
+-LPK_TrackingCamera now lerps as expected.
+-LPK_AgressivePathFollower now correctly sends events when finding and loosing an enemy.
+-Changed default behavior for broadcasting an event to all objects.
+-Added an event that is sent when a gradient animator finishes a cycle.
+-LPK_GradientAnimator now allows users to specify a sprite, textmesh, or UI image to modify the color of.  By default, it will use the components on the same game object.
+
+--------------------------------------------------------------------------------
+Version 1.1.9  1/22/19 - 2:20 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed bug with bitmask system for detecting collision.
+-Fixed bug with bitmask system for detecting mouse events.
+-Fixed bug with bitmask system for detecting visibility events.
+-Fixed typo in LPK_DynamicPlatformController.
+-Fixed bug with Feet Grounded detection in LPK_DynamicPlatformController.
+-Fixed bug where players always got an extra air jump, even when undesired in LPK_DynamicPlatformController.
+-Modified LPK_DynamicPlatformController to allow the controller to only allow horizontal movement while in air, if flags are set appropriatly.
+-Removed confusing functionality from LPK_ModifyTransformOnEvent
+-Designers can now set the name of spawned objects in the LPK_SpawnOnEvent component.
+-Removed all confusing property names from inspector view.
+-Removed obsolete property on LPK_ModifyHealthOnEvent
+-LPK_FollowObject now searches for a tag instead of a specified game object, to allow dynamic searching when an object is destroyed from the scene and then respawned (like a player for a tracking camera).
+-"Cheese" layer is removed...for real this time.
+
+--------------------------------------------------------------------------------
+Version 1.1.8  1/18/19 - 5:51 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed crashbug in Collision Event validation caused by a copy/paste error.
+-InputProperties now exists under BaseProperties to validate input events (this allows the user to specify a keypress for an event to be valid, for example, allowing multiple components on a single object to respond to a diverse amount of LPK_DispatchOnKeyboard senders.)
+-Changed how values are randomized on the timer for ease of use.
+-Fixed an issue where an empty array was considered valid parsing data for events.
+-Multiple collision event types can be recieved by the same component now.
+-Multiple mouse event types can be received by the same component now.
+-Multiple visibility event types can be received by the same component now.
+
+--------------------------------------------------------------------------------
+Version 1.1.7  1/17/19 - 6:24 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed crash bug when sending events without any tags (specifically collision events).
+-Added LPK_YourFirstComponent to guide students through making an LPK Component
+-Added toggling to all applicable components for On/Off state.
+
+--------------------------------------------------------------------------------
+Version 1.1.6  1/17/19 - 12:10 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Added missing debug notice for event dispatching from LPK_DispatchOnKeyboard
+-Added the ability to set a line of sight distance for LPK_LineOfSight
+-Modified LPK_LineOfSight to default the source object to itself it unset.  This will be useful for prefabs where gameobjects cannot be saved as properties.
+-Added toggle types to LPK_RotateTowardsMouse and LPK_RotateTowardsObject.
+-Commited changes from previous version (somehow they didn't get pushed...whoops!)
+
+--------------------------------------------------------------------------------
+Version 1.1.5  1/16/19 - 11:48 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Reworked event dispatching to allow tag limiting as well as game object limiting.
+-Collision Properties for collision event dispatching now allows for multiple tag setting.
+-Removed all references to event IDs in tooltips (old system that is now defunct).
+-Updated tooltips for consistency in termenology.
+
+--------------------------------------------------------------------------------
+Version 1.1.4  1/15/19 - 5:20 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed bug introduced in Version 1.1.0 that caused pause and unpause events to not be dispatched from LPK_ModifyPauseState
+
+--------------------------------------------------------------------------------
+Version 1.1.3 - 1/15/19 - 12:56 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed issue where LPK_HealthModify component's add and set properties did the opposite effect.
+-Removed shaders from Unity_LPK_Audio package.
+-Changed LPK_GravityEffect to allow indivitual scaling of X and Y gravity.
+
+--------------------------------------------------------------------------------
+Version 1.1.2 - 1/14/19 - 4:52 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed incorrect names being displayed in LPK_Health component.
+-Added LPK_LineOfSight component to check if two objects can see one another (via raycast).  Has options for intial sight, maintained sight, and lost sight.
+
+--------------------------------------------------------------------------------
+Version 1.1.1 - 1/14/19 - 12:02 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Reworked inner systems that invoke events for user simplicity when adding their own.
+-Fixed all enums to use the same naming convention.
+-Added the ability to set the active state/toggle all input dispatchers.
+-Fixed a bug where LPK_Detached event was not getting sent when using LPK_DetachOnEvent.
+
+--------------------------------------------------------------------------------
+Version 1.1.0 - 1/11/19 - 6:49 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Reworked event system on the public interface for registering.  This will break previous event connections.
+-Allowed access to difficulty labels for customization.
+-Fixed default behavior of collision event detection.
+-Minor optimizations.
+
+--------------------------------------------------------------------------------
+Version 1.0.3 - 1/11/19 - 3:58 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Switched enum options labeled "SWITCH" to "TOGGLE" for consistency.
+-Fixed over 150 typos.
+-Added GREATER_EQUAL and LESS_EQUAL options for LPK_Counter checking.
+-Fixed a bug with broadcasting events to all objects when all objects in the array were not set.
+
+--------------------------------------------------------------------------------
+Version 1.0.2 - 1/10/19 - 4:59 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Fixed bug where all input keys had to be set on controllers for functionality.
+-Removed leftover dev debug print.
+
+--------------------------------------------------------------------------------
+Version 1.0.1 - 1/10/19 - 3:45 PM - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Added broadcast to all objects for events (just do not specify receivers)
+-Modified dynamic platform controller to have some new ways to detect grounded state.
+-Removed "HOLD" input type for the dynamic platform controller.  You can add this back in the enum within LPK_DynamicPlatformController.cs if you wish to still use it - all functionality still exists.
+-Removed dev layer "cheese" that was pushed out in previous builds.
+-General optimizations.
+
+--------------------------------------------------------------------------------
+Version 1.0.0 - 1/7/19 - 7:00 PM  - Chris Onorati (onorati.c@digipen.edu)
+--------------------------------------------------------------------------------
+
+-Hello world!
