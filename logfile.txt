@@ -1,0 +1,23 @@
+
+LICENSE SYSTEM [20191023 15:52:12] Next license update check is after 2019-10-23T21:29:29
+
+Built from '2017.3/release' branch; Version is '2017.3.1f1 (fc1d3344e6ea) revision 16522547'; Using compiler version '160040219'
+OS: 'Windows 10  (10.0.0) 64bit' Language: 'en' Physical Memory: 6082 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+[Package Manager] Server::Start -- Port 61426 was selected
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Editor\Unity.exe
+-batchmode
+-logFile
+..\logfile.txt
+-projectPath
+..\exporter
+-exportPackage
+Assets/Scripts/New folder
+test.unitypackage
+-quit
+Couldn't set project path to: ..\exporter
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Utilities/Argv.cpp Line: 226)
+

@@ -1,0 +1,5 @@
+UNITY = "C:/Program\ Files/Unity/Editor/Unity.exe"
+#LOGFILE = "C:\Users\aeon.williams\Documents\DragonPack\_04_Export_Resources\logfile.txt"
+#PROJECT = "C:\Users\aeon.williams\Documents\DragonPack\_04_Export_Resources\exporter"
+#ASSET = "Assets/Scripts"
+#PACKAGE = "test.unitypackage"
