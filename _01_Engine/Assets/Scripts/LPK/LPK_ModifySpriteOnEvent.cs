@@ -1,8 +1,8 @@
 ﻿/***************************************************
 File:           LPK_ModifySpriteOnEvent.cs
 Authors:        Christopher Onorati
-Last Updated:   8/2/2019
-Last Version:   2018.3.14
+Last Updated:   10/24/2019
+Last Version:   2019.1.14
 
 Description:
   This component can be added to any object to cause
@@ -96,7 +96,7 @@ public class LPK_ModifySpriteOnEvent : LPK_Component
         public GameObject m_pSpriteCopyTarget;
 
         [Tooltip("Object whose property value will be copied to the recipient's property value. Only used if mode is set to copy. Note this will only affect the first object with the tag found.")]
-        [Rename("Texture Copy Tag")]
+        [Rename("Sprite Copy Tag")]
         [TagDropdown]
         public string m_SpriteCopyTag;
     }
@@ -134,6 +134,7 @@ public class LPK_ModifySpriteOnEvent : LPK_Component
     /************************************************************************************/
 
     //Used to assign the default game objet when the component is first added.
+    [SerializeField]
     bool m_bHasSetup = false;
 
     /**
@@ -576,7 +577,7 @@ public class LPK_ModifySpriteOnEvent_SpritePropertiesDrawer : PropertyDrawer
         SerializedProperty m_eSpriteModifyMode = property.FindPropertyRelative("m_eSpriteModifyMode");
         SerializedProperty m_ModifySprite = property.FindPropertyRelative("m_ModifySprite");
         SerializedProperty m_pSpriteCopyTarget = property.FindPropertyRelative("m_pSpriteCopyTarget");
-        SerializedProperty m_sSpriteCopyTag = property.FindPropertyRelative("m_sSpriteCopyTag");
+        SerializedProperty m_SpriteCopyTag = property.FindPropertyRelative("m_SpriteCopyTag");
 
         int indent = EditorGUI.indentLevel;
         EditorGUI.indentLevel = 0;
@@ -596,7 +597,7 @@ public class LPK_ModifySpriteOnEvent_SpritePropertiesDrawer : PropertyDrawer
             if(m_eSpriteModifyMode.enumValueIndex == (int)LPK_ModifySpriteOnEvent.LPK_NonNumericModifyMode.COPY)
             {
                 EditorGUI.PropertyField(new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight * 2, position.width, EditorGUIUtility.singleLineHeight),m_pSpriteCopyTarget);
-                EditorGUI.PropertyField(new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight * 3, position.width, EditorGUIUtility.singleLineHeight),m_sSpriteCopyTag);
+                EditorGUI.PropertyField(new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight * 3, position.width, EditorGUIUtility.singleLineHeight),m_SpriteCopyTag);
             }
         }
 

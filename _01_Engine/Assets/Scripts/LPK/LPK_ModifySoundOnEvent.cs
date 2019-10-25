@@ -1,7 +1,7 @@
 ﻿/***************************************************
 File:           LPK_ModifySoundOnEvent.cs
 Authors:        Christopher Onorati
-Last Updated:   8/27/2019
+Last Updated:   10/24/2019
 Last Version:   2019.1.14
 
 Description:
@@ -125,6 +125,7 @@ public class LPK_ModifySoundOnEvent : LPK_Component
     /************************************************************************************/
 
     //Used to assign the default game objet when the component is first added.
+    [SerializeField]
     bool m_bHasSetup = false;
 
 

@@ -1,7 +1,7 @@
 ﻿/***************************************************
 File:           LPK_DynamicPlatformerController.cs
 Authors:        Christopher Onorati
-Last Updated:   10/9/2019
+Last Updated:   10/24/2019
 Last Version:   2019.1.14
 
 Description:
@@ -188,8 +188,8 @@ public class LPK_DynamicPlatformerController : LPK_Component
         }
 
         //Movement allowed check.
-        if ((m_bCanMove && m_bCanMoveWhileJumping && m_iAirJumpsUsed <= 0) || (m_bCanMove && !m_bCanMoveWhileJumping && !m_bIsJumping)
-             || (!m_bCanMove && m_bCanMoveWhileJumping && m_bIsJumping) || (m_bCanMove && m_bCanMoveWhileAirJumping && m_iAirJumpsUsed > 0))
+        if ((m_bCanMove && m_bCanMoveWhileJumping && m_iAirJumpsUsed <= 0) || (m_bCanMove && m_bCanMoveWhileJumping && m_bGrounded)
+             || (m_bCanMove && m_bCanMoveWhileAirJumping && m_iAirJumpsUsed > 0) || (m_bCanMove && m_bGrounded))
         {
             //Take speed from previous frame and apply some deceleration
             float oldSpeed = m_cRigidBody.velocity.x * (1 - m_Deceleration);

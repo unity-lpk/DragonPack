@@ -66,6 +66,7 @@ public class LPK_DispatchOnRaycast : LPK_Component
     /************************************************************************************/
 
     //Used to assign the default game objet when the component is first added.
+    [SerializeField]
     bool m_bHasSetup = false;
 
     /**
