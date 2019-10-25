@@ -1,8 +1,8 @@
 ﻿/***************************************************
 File:           LPK_ModifyGameObjectPersistenceOnEvent.cs
 Authors:        Christopher Onorati
-Last Updated:   8/1/2019
-Last Version:   2018.3.14
+Last Updated:   10/24/2019
+Last Version:   2019.1.14
 
 Description:
   This component modifies the persistence of gameobjects
@@ -55,6 +55,7 @@ public class LPK_ModifyGameObjectPersistenceOnEvent : LPK_Component
     /************************************************************************************/
 
     //Used to assign the default game objet when the component is first added.
+    [SerializeField]
     bool m_bHasSetup = false;
 
 

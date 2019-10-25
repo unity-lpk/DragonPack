@@ -1,8 +1,8 @@
 ﻿/***************************************************
 File:           LPK_ModifyParticleSystemOnEvent.cs
 Authors:        Christopher Onorati
-Last Updated:   8/2/2019
-Last Version:   2018.3.14
+Last Updated:   10/24/2019
+Last Version:   2019.1.14
 
 Description:
   This component can be used to control the active state
@@ -54,6 +54,7 @@ public class LPK_ModifyParticleSystemOnEvent : LPK_Component
     /************************************************************************************/
 
     //Used to assign the default game objet when the component is first added.
+    [SerializeField]
     bool m_bHasSetup = false;
 
     /**

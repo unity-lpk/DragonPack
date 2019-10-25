@@ -1,7 +1,7 @@
 ﻿/***************************************************
 File:           LPK_DestroyOnEvent.cs
 Authors:        Christopher Onorati
-Last Updated:   10/9/2019
+Last Updated:   10/24/2019
 Last Version:   2019.1.4
 
 Description:
@@ -32,7 +32,7 @@ public class LPK_DestroyOnEvent : LPK_Component
 {
     /************************************************************************************/
 
-    [Tooltip("Game objects to destroy on receiving event.  If this array and the tag array are set to length 0, assume self.")]
+    [Tooltip("Game objects to destroy on receiving event.")]
     public GameObject[] m_DestructionTargets; 
 
     [Header("Event Receiving Info")]
@@ -49,6 +49,7 @@ public class LPK_DestroyOnEvent : LPK_Component
     /************************************************************************************/
 
     //Used to assign the default game objet when the component is first added.
+    [SerializeField]
     bool m_bHasSetup = false;
 
     /**

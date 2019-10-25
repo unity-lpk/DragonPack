@@ -1,7 +1,7 @@
 ﻿/***************************************************
 File:           LPK_ModifyTextOnEvent.cs
 Authors:        Christopher Onorati
-Last Updated:   8/27/2019
+Last Updated:   10/24/2019
 Last Version:   2019.1.14
 
 Description:
@@ -153,6 +153,7 @@ public class LPK_ModifyTextOnEvent : LPK_Component
     /************************************************************************************/
 
     //Used to assign the default game objet when the component is first added.
+    [SerializeField]
     bool m_bHasSetup = false;
 
     /**

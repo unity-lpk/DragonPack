@@ -1,7 +1,7 @@
 ﻿/***************************************************
 File:           LPK_ApplyVelocityOnEvent2D
 Authors:        Christopher Onorati
-Last Updated:   9/6/2019
+Last Updated:   10/24/2019
 Last Version:   2019.1.14
 
 Description:
@@ -71,6 +71,7 @@ public class LPK_ApplyVelocityOnEvent2D : LPK_Component
     /************************************************************************************/
 
     //Used to assign the default game objet when the component is first added.
+    [SerializeField]
     bool m_bHasSetup = false;
 
     /************************************************************************************/
