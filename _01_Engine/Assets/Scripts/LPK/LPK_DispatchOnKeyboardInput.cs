@@ -106,7 +106,7 @@ public class LPK_DispatchOnKeyboardInput : LPK_Component
             else if(m_KeyboardInputEvent.m_EventSendingMode == LPK_EventSendingInfo.LPK_EventSendingMode.OWNER)
                 m_KeyboardInputEvent.m_Event.Dispatch(gameObject);
             else if (m_KeyboardInputEvent.m_EventSendingMode == LPK_EventSendingInfo.LPK_EventSendingMode.TAGS)
-                m_KeyboardInputEvent.m_Event.Dispatch(gameObject, m_KeyboardInputEvent.m_Tags);
+                m_KeyboardInputEvent.m_Event.Dispatch(null, m_KeyboardInputEvent.m_Tags);
 
             if (m_bPrintDebug)
                 LPK_PrintDebugDispatchingEvent(m_KeyboardInputEvent, this, "Keyboard Input");

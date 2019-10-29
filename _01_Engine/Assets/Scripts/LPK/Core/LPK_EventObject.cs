@@ -1,7 +1,7 @@
 ﻿/***************************************************
 File:           LPK_EventObject.cs
 Authors:        Victor Cecci & Christoher Onorati
-Last Updated:   10/17/19
+Last Updated:   10/29/19
 Last Version:   2019.1.14
 
 Description:
@@ -57,7 +57,7 @@ public class LPK_EventObject : ScriptableObject
 
         for(int i = 0; i < componets.Length; i++)
         {
-            if (LPK_MultiTagManager.CheckGameObjectForTags(componets[i].gameObject, _tags))
+            if (LPK_MultiTagManager.CheckGameObjectForTags(componets[i].gameObject, _tags) && m_cReceivers.Contains(componets[i]))
                 componets[i].OnEvent(componets[i].gameObject);
         }
     }

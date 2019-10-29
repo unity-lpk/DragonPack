@@ -1,7 +1,7 @@
 ﻿/***************************************************
 File:           LPK_DynamicPlatformerController.cs
 Authors:        Christopher Onorati
-Last Updated:   10/24/2019
+Last Updated:   10/29/2019
 Last Version:   2019.1.14
 
 Description:
@@ -245,7 +245,6 @@ public class LPK_DynamicPlatformerController : LPK_Component
             {
                 //Apply upward velocity based on specified speed
                 m_cRigidBody.velocity = new Vector3(m_cRigidBody.velocity.x, m_flJumpSpeed, 0);
-                m_bGrounded = false;
                 m_iDelayFrame = 2;
 
                 m_bIsJumping = true;
@@ -343,7 +342,8 @@ public class LPK_DynamicPlatformerController : LPK_Component
                 {
                     if (colliders[i] != null && colliders[i].gameObject != gameObject && !colliders[i].isTrigger)
                     {
-                        GroundCharacter();
+                        if(!m_bGrounded)
+                            GroundCharacter();
                         return;
                     }
                 }
@@ -361,7 +361,9 @@ public class LPK_DynamicPlatformerController : LPK_Component
         {
             if (d.collider != null && d.collider.gameObject != gameObject)
             {
-                GroundCharacter();
+                if(!m_bGrounded)
+                    GroundCharacter();
+
                 return;
             }
         }
