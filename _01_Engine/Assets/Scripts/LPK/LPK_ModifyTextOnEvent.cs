@@ -1,4 +1,4 @@
-﻿/***************************************************
+/***************************************************
 File:           LPK_ModifyTextOnEvent.cs
 Authors:        Christopher Onorati
 Last Updated:   10/24/2019
