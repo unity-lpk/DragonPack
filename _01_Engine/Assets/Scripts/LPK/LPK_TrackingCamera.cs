@@ -1,8 +1,8 @@
 ﻿/***************************************************
 File:           LPK_TrackingCamera.cs
 Authors:        Christopher Onorati
-Last Updated:   7/22/2019
-Last Version:   2018.3.14
+Last Updated:   10/29/2019
+Last Version:   2019.1.14
 
 Description:
   This component allows for a dynamic tracking camera in a
@@ -94,7 +94,7 @@ public class LPK_TrackingCamera : LPK_Component
             m_flInitialSize = m_cCamera.fieldOfView;
 
         if (m_bLockXTranslation)
-            m_flLockedXValue = m_cTransform.position.y;
+            m_flLockedXValue = m_cTransform.position.x;
         if (m_bLockYTranslation)
             m_flLockedYValue = m_cTransform.position.y;
     }
@@ -126,7 +126,9 @@ public class LPK_TrackingCamera : LPK_Component
         //Averaging the location of all important objects.
         for (int i = 0; i < m_aImportantObjects.Count; i++)
         {
-            if (m_aImportantObjects[i] != null && Vector2.Distance(m_aImportantObjects[i].transform.position, m_cTransform.position) <= m_flCullingDistane)
+            //NOTENOTE:  Added ability to turn off a camera object from being tracked by checking enable state.  Makes perf worse but oh well?
+            if (m_aImportantObjects[i] != null && m_aImportantObjects[i].GetComponent<LPK_TrackingCameraObject>().enabled &&
+                Vector2.Distance(m_aImportantObjects[i].transform.position, m_cTransform.position) <= m_flCullingDistane)
             {
                 pos.x += m_aImportantObjects[i].position.x * m_aImportanceWeights[i];
                 pos.y += m_aImportantObjects[i].position.y * m_aImportanceWeights[i];

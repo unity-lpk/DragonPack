@@ -180,6 +180,10 @@ public class LPK_Component : MonoBehaviour
         if(_activator != null && _activator != gameObject)
             return false;
 
+        //If a component is disabled it stops recieving events.
+        if (!enabled)
+            return false;
+
         return true;
     }
 

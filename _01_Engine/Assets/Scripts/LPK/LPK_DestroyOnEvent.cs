@@ -1,7 +1,7 @@
 ﻿/***************************************************
 File:           LPK_DestroyOnEvent.cs
 Authors:        Christopher Onorati
-Last Updated:   10/24/2019
+Last Updated:   10/31/2019
 Last Version:   2019.1.4
 
 Description:
@@ -32,7 +32,7 @@ public class LPK_DestroyOnEvent : LPK_Component
 {
     /************************************************************************************/
 
-    [Tooltip("Game objects to destroy on receiving event.")]
+    [Tooltip("Game objects to destroy on receiving event.  If no game objects are set, destroy self.")]
     public GameObject[] m_DestructionTargets; 
 
     [Header("Event Receiving Info")]
@@ -62,6 +62,10 @@ public class LPK_DestroyOnEvent : LPK_Component
     {
         if(m_EventTrigger != null)
             m_EventTrigger.Register(this);
+
+        //Needed for prefab destruction!
+        if (m_DestructionTargets.Length <= 0)
+            m_DestructionTargets = new GameObject[] { gameObject };
     }
 
     /**

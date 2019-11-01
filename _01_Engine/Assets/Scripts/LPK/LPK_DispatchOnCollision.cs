@@ -310,6 +310,10 @@ public sealed class LPK_DispatchOnCollision: LPK_Component
     **/
     void DispatchCollisionEvent(GameObject _other)
     {
+        //If a component is disabled it stops recieving events.
+        if (!enabled)
+            return;
+
         if(m_CollisionEvent != null && m_CollisionEvent.m_Event != null)
         {
             if(m_CollisionEvent.m_EventSendingMode == LPK_CollisionEventSendingInfo.LPK_EventSendingMode.ALL)
