@@ -371,6 +371,8 @@ public class LPK_DynamicPlatformerController : LPK_Component
                 return;
             }
         }
+		
+		m_bGrounded = false;
     }
 
     /**
