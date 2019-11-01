@@ -88,15 +88,15 @@ public class LPK_DynamicPlatformerController : LPK_Component
     public LPK_EventSendingInfo m_CharacterLandEvent;
 
     /************************************************************************************/
-  
+
+    //Detect if the player is jumping.
+    bool m_bIsJumping = false;
+
     //Number of mid-air jumps used
     int m_iAirJumpsUsed = 0;
 
     //Time the character has held the jump button down.  Used for HOLD.
     float m_flAirTime = 0.0f;
-
-    //Flag to detect jumps status.
-    bool m_bIsJumping = false;
 
     //Int counter used to not detect contactpoints on the feet when collision ends.
     int m_iDelayFrame = 2;
@@ -246,7 +246,6 @@ public class LPK_DynamicPlatformerController : LPK_Component
                 //Apply upward velocity based on specified speed
                 m_cRigidBody.velocity = new Vector3(m_cRigidBody.velocity.x, m_flJumpSpeed, 0);
                 m_iDelayFrame = 2;
-
                 m_bIsJumping = true;
 
                 DispatchJumpEvent();
@@ -265,8 +264,6 @@ public class LPK_DynamicPlatformerController : LPK_Component
                     m_cRigidBody.velocity = new Vector3(m_cRigidBody.velocity.x, (m_flJumpSpeed) / m_iAirJumpsUsed, 0);
                 else
                     m_cRigidBody.velocity = new Vector3(m_cRigidBody.velocity.x, m_flJumpSpeed, 0);
-
-                m_bIsJumping = true;
 
                 //Dispatch Jump
                 DispatchJumpEvent();
@@ -294,8 +291,9 @@ public class LPK_DynamicPlatformerController : LPK_Component
             if (!m_bGrounded)
                 m_iAirJumpsUsed++;
 
-            m_flAirTime = 0.0f;
             m_bIsJumping = true;
+
+            m_flAirTime = 0.0f;
 
             //Dispatch event.
             DispatchJumpEvent();
@@ -334,6 +332,7 @@ public class LPK_DynamicPlatformerController : LPK_Component
         if (m_pFeetCollider.isTrigger)
         {
             ContactFilter2D filter = new ContactFilter2D();
+            filter.layerMask = m_pFeetCollider.gameObject.layer;
             Collider2D[] colliders = new Collider2D[16];
 
             if (m_pFeetCollider.OverlapCollider(filter, colliders) > 0)
@@ -347,6 +346,11 @@ public class LPK_DynamicPlatformerController : LPK_Component
                         return;
                     }
                 }
+
+                if(m_bAllowGraceJump && !m_bIsJumping)
+					m_bGrounded = true;
+				else
+                    m_bGrounded = false;
             }
 
             return;
@@ -370,20 +374,6 @@ public class LPK_DynamicPlatformerController : LPK_Component
     }
 
     /**
-    * FUNCTION NAME: OnCollisionExit2D
-    * DESCRIPTION  : Allows a grace jump when falling off a ledge, if desired.
-    * INPUTS       : col - Holds information on the collision event.
-    * OUTPUTS      : None
-    **/
-    void OnCollisionExit2D(Collision2D col)
-    {
-        if (m_bAllowGraceJump)
-            return;
-        else
-            m_bGrounded = false;
-    }
-
-    /**
     * FUNCTION NAME: GroundCharacter
     * DESCRIPTION  : Sets the character to be grounded, with an event dispatched.
     * INPUTS       : None
@@ -394,8 +384,8 @@ public class LPK_DynamicPlatformerController : LPK_Component
         DispatchLandEvent();
 
         //Set grounded flag and reset jumps
-        m_bGrounded = true;
         m_bIsJumping = false;
+        m_bGrounded = true;
         m_iAirJumpsUsed = 0;
 
         if (m_bPrintDebug)

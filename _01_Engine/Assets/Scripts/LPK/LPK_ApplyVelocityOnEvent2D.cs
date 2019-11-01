@@ -1,7 +1,7 @@
 ﻿/***************************************************
 File:           LPK_ApplyVelocityOnEvent2D
 Authors:        Christopher Onorati
-Last Updated:   10/24/2019
+Last Updated:   10/31/2019
 Last Version:   2019.1.14
 
 Description:
@@ -50,6 +50,7 @@ public class LPK_ApplyVelocityOnEvent2D : LPK_Component
     public Transform m_pTargetGameObject;
 
     [Tooltip("Tag to find a game object with to apply velocity towards.")]
+    [TagDropdown]
     public string m_TargetTags;
 
     public float m_flRadius = 10.0f;
