@@ -1,8 +1,8 @@
 ﻿/***************************************************
 File:           LPK_DynamicPlatformerControllerFeet.cs
 Authors:        Christopher Onorati
-Last Updated:   11/3/2019
-Last Version:   2019.1.14
+Last Updated:   11/8/2019
+Last Version:   2019.1.5
 
 Description:
   This component allows for grounded detection via the feet
@@ -33,6 +33,9 @@ public class LPK_DynamicPlatformerControllerFeet : LPK_Component
     //Counter used to detect how many contacts have been made.
     public int m_iContacts;
 
+    //Last game object that was landed on.
+    public GameObject m_pFirstHitLand;
+
     /************************************************************************************/
 
     //Transform of the feet.
@@ -47,6 +50,20 @@ public class LPK_DynamicPlatformerControllerFeet : LPK_Component
     void Start()
     {
         m_cTransform = GetComponent<Transform>();
+
+        if(GetComponent<Collider2D>() == null)
+        {
+            if (m_bPrintDebug)
+                LPK_PrintWarning(this, "No collider is on the feet for an LPK_DynamicPlatformerController.  Is this intended?");
+
+            return;
+        }
+
+        if (!GetComponent<Collider2D>().isTrigger)
+        {
+            if (m_bPrintDebug)
+                LPK_PrintDebug(this, "Collider for feet on an LPK_DynamicPlatformerController is set to not be a trigger.  Are you sure?");
+        }
     }
 
     /**
@@ -58,7 +75,11 @@ public class LPK_DynamicPlatformerControllerFeet : LPK_Component
     void OnCollisionEnter2D(Collision2D collision)
     {
         //Ignore our own parent.
-        if (m_cTransform.parent == collision.gameObject)
+        if (m_cTransform && m_cTransform.parent && m_cTransform.parent == collision.gameObject)
+            return;
+
+        //TODO: This check is probably not needed.
+        if (collision.gameObject.GetComponent<Collider2D>().isTrigger)
             return;
 
         m_iContacts++;
@@ -68,7 +89,7 @@ public class LPK_DynamicPlatformerControllerFeet : LPK_Component
     }
 
     /**
-    * FUNCTION NAME: OnCollisionEnter2D
+    * FUNCTION NAME: OnCollisionExit2D
     * DESCRIPTION  : Detect collision to determine grounded state.
     * INPUTS       : collision - Infomration RE: collision interaction.
     * OUTPUTS      : None
@@ -76,7 +97,10 @@ public class LPK_DynamicPlatformerControllerFeet : LPK_Component
     void OnCollisionExit2D(Collision2D collision)
     {
         //Ignore our own parent.
-        if (m_cTransform.parent == collision.gameObject)
+        if (m_cTransform && m_cTransform.parent && m_cTransform.parent == collision.gameObject)
+            return;
+
+        if (collision.gameObject.GetComponent<Collider2D>().isTrigger)
             return;
 
         m_iContacts--;
@@ -94,7 +118,7 @@ public class LPK_DynamicPlatformerControllerFeet : LPK_Component
     void OnTriggerEnter2D (Collider2D collision)
     {
         //Ignore our own parent.
-        if (m_cTransform.parent == collision.gameObject)
+        if (m_cTransform && m_cTransform.parent && m_cTransform.parent == collision.gameObject)
             return;
 
         if (collision.isTrigger)
@@ -115,7 +139,7 @@ public class LPK_DynamicPlatformerControllerFeet : LPK_Component
     void OnTriggerExit2D(Collider2D collision)
     {
         //Ignore our own parent.
-        if (m_cTransform.parent == collision.gameObject)
+        if (m_cTransform && m_cTransform.parent && m_cTransform.parent == collision.gameObject)
             return;
 
         if (collision.isTrigger)

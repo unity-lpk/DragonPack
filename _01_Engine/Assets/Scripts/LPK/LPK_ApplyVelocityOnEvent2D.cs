@@ -1,7 +1,7 @@
 ﻿/***************************************************
 File:           LPK_ApplyVelocityOnEvent2D
 Authors:        Christopher Onorati
-Last Updated:   10/31/2019
+Last Updated:   11/13/2019
 Last Version:   2019.1.14
 
 Description:
@@ -174,6 +174,18 @@ public class LPK_ApplyVelocityOnEvent2D : LPK_Component
         }
 
         return false;
+    }
+
+    /**
+    * FUNCTION NAME: OnDestroy
+    * DESCRIPTION  : Removes game object from the event queue.
+    * INPUTS       : None
+    * OUTPUTS      : None
+    **/
+    void OnDestroy()
+    {
+        if(m_EventTrigger != null)
+            m_EventTrigger.Unregister(this);
     }
 }
 

@@ -1,8 +1,8 @@
 ﻿/***************************************************
 File:           LPK_FaceVelocityOnEvent.cs
 Authors:        Christopher Onorati
-Last Updated:   8/1/2019
-Last Version:   2018.3.14
+Last Updated:   11/13/2019
+Last Version:   2019.1.14
 
 Description:
   This component causes an object to face its velocity
@@ -97,6 +97,18 @@ public class LPK_FaceVelocityOnEvent : LPK_Component
 
         if (m_bPrintDebug)
             LPK_PrintDebug(this, "Setting game object " + gameObject.name + "to face current velocity.");
+    }
+
+    /**
+    * FUNCTION NAME: OnDestroy
+    * DESCRIPTION  : Removes game object from the event queue.
+    * INPUTS       : None
+    * OUTPUTS      : None
+    **/
+    void OnDestroy()
+    {
+        if(m_EventTrigger != null)
+            m_EventTrigger.Unregister(this);
     }
 }
 

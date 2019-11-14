@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\LPK\Analytics\LPK_AnalyticsRecordSceneTime.cs" />
     <Compile Include="Assets\Scripts\LPK\Analytics\LPK_AnalyticsUtilities.cs" />
     <Compile Include="Assets\Scripts\LPK\Controllers\LPK_DynamicPlatformerController.cs" />
+    <Compile Include="Assets\Scripts\LPK\Controllers\LPK_DynamicPlatformerControllerFeet.cs" />
     <Compile Include="Assets\Scripts\LPK\Controllers\LPK_DynamicTopDownOrthogonalController.cs" />
     <Compile Include="Assets\Scripts\LPK\Controllers\LPK_DynamicTopDownRotationController.cs" />
     <Compile Include="Assets\Scripts\LPK\Core\Console_Commands\LPK_Command_Clear.cs" />

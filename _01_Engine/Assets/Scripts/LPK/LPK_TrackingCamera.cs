@@ -1,8 +1,8 @@
 ﻿/***************************************************
 File:           LPK_TrackingCamera.cs
 Authors:        Christopher Onorati
-Last Updated:   10/29/2019
-Last Version:   2019.1.14
+Last Updated:   11/8/2019
+Last Version:   2019.1.5
 
 Description:
   This component allows for a dynamic tracking camera in a
@@ -150,7 +150,8 @@ public class LPK_TrackingCamera : LPK_Component
         {
             for (int i = 0; i < m_aImportanceWeights.Count; i++)
             {
-                if(Vector2.Distance(m_aImportantObjects[i].transform.position, m_cTransform.position) <= m_flCullingDistane)
+                if(Vector2.Distance(m_aImportantObjects[i].transform.position, m_cTransform.position) <= m_flCullingDistane
+                   && m_aImportantObjects[i].GetComponent<LPK_TrackingCameraObject>().enabled)
                     totalImportance += m_aImportanceWeights[i];
             }
         }

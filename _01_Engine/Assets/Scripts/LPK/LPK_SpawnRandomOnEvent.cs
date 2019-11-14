@@ -2,7 +2,7 @@
 File:           LPK_SpawnRandomOnEvent.cs
 Authors:        Christopher Onorati
 Last Updated:   9/18/2019
-Last Version:   2019.1.14
+Last Version:   2019.11.05
 
 Description:
   This component can be attached to any object to cause
@@ -60,7 +60,7 @@ public class LPK_SpawnRandomOnEvent : LPK_SpawnOnEvent
             Vector3 randAngles = new Vector3(Random.Range(-m_vecRandomAngleVariance.x, m_vecRandomAngleVariance.x), Random.Range(-m_vecRandomAngleVariance.y, m_vecRandomAngleVariance.y),
                                              Random.Range(-m_vecRandomAngleVariance.z, m_vecRandomAngleVariance.z));
 
-            GameObject prefabToSpawn = m_OptionsToSpawn[Random.Range(0, m_OptionsToSpawn.Length - 1)];
+            GameObject prefabToSpawn = m_OptionsToSpawn[Random.Range(0, m_OptionsToSpawn.Length )];
 
             //NOTENOTE:  If a null object is picked, do not count towards the spawn.  This also terminates the loop to avoid a case of infinite looping.
             if(prefabToSpawn == null)
@@ -80,7 +80,7 @@ public class LPK_SpawnRandomOnEvent : LPK_SpawnOnEvent
             else if (m_bPrintDebug)
                 LPK_PrintWarning(this, "No target set for spawn position.  Defaulting to 0, 0, 0.");
 
-            GameObject obj = (GameObject)Instantiate(m_pPrefabToSpawn, spawnPosition + new Vector3(randX, randY, randZ), Quaternion.identity);
+            GameObject obj = (GameObject)Instantiate(prefabToSpawn, spawnPosition + new Vector3(randX, randY, randZ), Quaternion.identity);
             Transform objTransform = obj.GetComponent<Transform>();
 
             if (m_eRotationSpawnMode == LPK_NonNumericModifyMode.SET)

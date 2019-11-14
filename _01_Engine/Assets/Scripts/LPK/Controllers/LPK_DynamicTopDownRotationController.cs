@@ -1,13 +1,35 @@
 ﻿/***************************************************
 File:           LPK_DynamicTopDownRotationController.cs
 Authors:        Christopher Onorati
-Last Updated:   7/30/2019
-Last Version:   2018.3.14
+Last Updated:   11/10/2019
+Last Version:   2019.1.5
 
 Description:
   This component replicates the player controls of a tank 
   or space ship using keys to move forward / backward 
   and rotating. This uses a dynamic RigidBody.
+
+  Good settings for gamepad movement:
+
+  Gravity: 10000
+  Dead: 0.9
+  Sensitivity: 1
+  Snap = Yes
+  Invert = Yes
+  Type = Joystick Axis
+  Axis =  Y axis
+  Joy Num = Joystick 2
+
+  Good settings for gamepad rotation:
+
+  Gravity: 10000
+  Dead: 0.9
+  Sensitivity: 1
+  Snap = Yes
+  Invert = No
+  Type = Joystick Axis
+  Axis = 4th Axis
+  Joy Num = Joystick 2
 
 This script is a basic and generic implementation of its 
 functionality. It is designed for educational purposes and 
@@ -165,8 +187,8 @@ public class LPK_DynamicTopDownRotationControllerEditor : Editor
         GUILayout.Space(10);
         EditorGUILayout.LabelField("Component Properties", EditorStyles.boldLabel);
 
-        owner.m_sHorizontal = EditorGUILayout.TextField(new GUIContent("Horizontal Input", "Virtual button used to rotate left and right."), owner.m_sHorizontal);
-        owner.m_sVertical = EditorGUILayout.TextField(new GUIContent("Vertical Input", "Virtual button used to move up and down."), owner.m_sVertical);
+        owner.m_sHorizontal = EditorGUILayout.TextField(new GUIContent("Rotation Input", "Virtual button used to rotate left and right."), owner.m_sHorizontal);
+        owner.m_sVertical = EditorGUILayout.TextField(new GUIContent("Movement Input", "Virtual button used to move up and down."), owner.m_sVertical);
 
         owner.m_flRotationSpeed = EditorGUILayout.FloatField(new GUIContent("Rotation Speed", "How fast the character will rotate."), owner.m_flRotationSpeed);
         owner.m_flAccelerationSpeed = EditorGUILayout.FloatField(new GUIContent("Acceleration Speed", "Speed the character will move at."), owner.m_flAccelerationSpeed);

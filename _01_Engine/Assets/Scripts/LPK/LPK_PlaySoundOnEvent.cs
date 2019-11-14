@@ -1,7 +1,7 @@
 ﻿/***************************************************
 File:           LPK_PlaySoundOnEvent
 Authors:        Christopher Onorati
-Last Updated:   8/27/2019
+Last Updated:   11/7/2019
 Last Version:   2019.1.14
 
 Description:
@@ -32,6 +32,8 @@ public class LPK_PlaySoundOnEvent : LPK_Component
 
     [Tooltip("Audio Source(s) who will be used to play sound.")]
     public AudioSource[] m_TargetAudioSources;
+
+    public bool m_bUseVariance;
 
     public float m_flVolumeRangeMin = 1.0f;
     public float m_flVolumeRangeMax = 1.0f;
@@ -84,12 +86,16 @@ public class LPK_PlaySoundOnEvent : LPK_Component
         if (m_bPrintDebug)
             LPK_PrintDebugReceiveEvent(m_EventTrigger, this);
 
-        for(int i = 0; i < m_TargetAudioSources.Length; i++)
+        for (int i = 0; i < m_TargetAudioSources.Length; i++)
         {
             if (m_TargetAudioSources[i] != null)
             {
-                m_TargetAudioSources[i].GetComponent<AudioSource>().volume = m_TargetAudioSources[i].GetComponent<AudioSource>().volume + Random.Range(m_flVolumeRangeMin, m_flVolumeRangeMax);
-                m_TargetAudioSources[i].GetComponent<AudioSource>().pitch = Random.Range(m_flPitchRangeMin, m_flPitchRangeMax);
+                if (m_bUseVariance)
+                {
+                    m_TargetAudioSources[i].GetComponent<AudioSource>().volume = Random.Range(m_flVolumeRangeMin, m_flVolumeRangeMax);
+                    m_TargetAudioSources[i].GetComponent<AudioSource>().pitch = Random.Range(m_flPitchRangeMin, m_flPitchRangeMax);
+                }
+
                 m_TargetAudioSources[i].GetComponent<AudioSource>().Play();
             }
         }
@@ -172,11 +178,17 @@ public class LPK_PlaySoundOnEventEditor : Editor
         EditorGUILayout.LabelField("Component Properties", EditorStyles.boldLabel);
 
         LPK_EditorArrayDraw.DrawArray(targetAudioSources, LPK_EditorArrayDraw.LPK_EditorArrayDrawMode.DRAW_MODE_BUTTONS);
-        owner.m_flVolumeRangeMin = EditorGUILayout.FloatField(new GUIContent("Volume Variance Min", "Minimum adjusment to the volume for the sound to be played at.  The volume will be the Audio Source's volume plus a randomized each time the sound is called to be played."), owner.m_flVolumeRangeMin);
-        owner.m_flVolumeRangeMax = EditorGUILayout.FloatField(new GUIContent("Volume Variance Max", "Maximum adjustment to the  volume for the sound to be played at.  The volume will be the Audio Source's volume plus a randomized each time the sound is called to be played."), owner.m_flVolumeRangeMax);
-        
-        owner.m_flPitchRangeMin = EditorGUILayout.FloatField(new GUIContent("Pitch Variance Min", "Minimum pitch for the sound to be played at.  The pitch will be randomized each time the sound is called to be played."), owner.m_flPitchRangeMin);
-        owner.m_flPitchRangeMax = EditorGUILayout.FloatField(new GUIContent("Pitch Variance Max", "Maximum pitch for the sound to be played at.  The pitch will be randomized each time the sound is called to be played."), owner.m_flPitchRangeMax);
+
+        owner.m_bUseVariance = EditorGUILayout.Toggle(new GUIContent("Use Variance", "Use some random variance for pitch and volume when playing audio."), owner.m_bUseVariance);
+
+        if (owner.m_bUseVariance)
+        {
+            owner.m_flVolumeRangeMin = EditorGUILayout.FloatField(new GUIContent("Volume Variance Min", "Minimum adjusment to the volume for the sound to be played at.  The volume will be the Audio Source's volume plus a randomized each time the sound is called to be played."), owner.m_flVolumeRangeMin);
+            owner.m_flVolumeRangeMax = EditorGUILayout.FloatField(new GUIContent("Volume Variance Max", "Maximum adjustment to the  volume for the sound to be played at.  The volume will be the Audio Source's volume plus a randomized each time the sound is called to be played."), owner.m_flVolumeRangeMax);
+
+            owner.m_flPitchRangeMin = EditorGUILayout.FloatField(new GUIContent("Pitch Variance Min", "Minimum pitch for the sound to be played at.  The pitch will be randomized each time the sound is called to be played."), owner.m_flPitchRangeMin);
+            owner.m_flPitchRangeMax = EditorGUILayout.FloatField(new GUIContent("Pitch Variance Max", "Maximum pitch for the sound to be played at.  The pitch will be randomized each time the sound is called to be played."), owner.m_flPitchRangeMax);
+        }
 
         owner.m_flCooldown = EditorGUILayout.FloatField(new GUIContent("Cooldown", "Number of seconds to wait until an event can trigger another instance of sound played."), owner.m_flCooldown);
 

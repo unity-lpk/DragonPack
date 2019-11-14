@@ -248,6 +248,7 @@ MonoBehaviour:
     m_Event: {fileID: 0}
     m_EventSendingMode: 2
     m_Tags: []
+  m_bHasSetup: 0
 --- !u!1 &340163247
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,6 +377,7 @@ MonoBehaviour:
     m_Event: {fileID: 0}
     m_EventSendingMode: 2
     m_Tags: []
+  m_bHasSetup: 0
 --- !u!1 &484124010
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,6 +445,7 @@ GameObject:
   - component: {fileID: 541831333}
   - component: {fileID: 541831332}
   - component: {fileID: 541831331}
+  - component: {fileID: 541831335}
   m_Layer: 0
   m_Name: New Sprite (3)
   m_TagString: Respawn
@@ -471,6 +474,7 @@ MonoBehaviour:
     m_Event: {fileID: 0}
     m_EventSendingMode: 2
     m_Tags: []
+  m_bHasSetup: 1
 --- !u!61 &541831332
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -559,6 +563,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &541831335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541831330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8ce78f22a5365b4ca3ef0a4a4504726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_bPrintDebug: 0
+  m_sLabel: 
+  m_pPrefabToSpawn: {fileID: 0}
+  m_flDelayTime: 0
+  m_iSpawnPerEventCount: 1
+  m_iMaxTotalSpawnCount: 0
+  m_flCooldown: 0
+  m_ePositionSpawnMode: 0
+  m_pTargetSpawnPosition: {fileID: 0}
+  m_vecSpawnPosition: {x: 0, y: 0, z: 0}
+  m_eRotationSpawnMode: 0
+  m_pTargetSpawnRotation: {fileID: 0}
+  m_vecSpawnRotation: {x: 0, y: 0, z: 0}
+  m_vecRandomOffsetVariance: {x: 0, y: 0, z: 0}
+  m_vecRandomAngleVariance: {x: 0, y: 0, z: 0}
+  m_EventTrigger: {fileID: 11400000, guid: 21c3a14ed9269b84baa03b84c27571ac, type: 2}
+  m_GameObjectSpawnedEvent:
+    m_Event: {fileID: 0}
+    m_EventSendingMode: 2
+    m_Tags: []
 --- !u!1 &1140046047
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,6 +1006,7 @@ MonoBehaviour:
     m_Event: {fileID: 0}
     m_EventSendingMode: 0
     m_Tags: []
+  m_bHasSetup: 0
 --- !u!114 &1561333390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1003,6 +1040,7 @@ MonoBehaviour:
     m_Event: {fileID: 0}
     m_EventSendingMode: 0
     m_Tags: []
+  m_bHasSetup: 0
 --- !u!114 &1561333391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1015,13 +1053,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87a3d105b95ea38498501754bd070f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_bDrawInScene: 1
   m_bDrawInGame: 0
-  m_bDrawInEditor: 1
+  m_bDrawInBuild: 1
   m_bDrawHierarchy: 0
   m_sLabel: 
   m_flLength: 2
   m_vecDebugLineColor: {r: 1, g: 0, b: 0, a: 1}
   m_vecLineRendererColor: {r: 1, g: 0, b: 0, a: 1}
+  m_vecBuildLineRendererColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1675753198
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,3 +1296,4 @@ MonoBehaviour:
     m_Event: {fileID: 0}
     m_EventSendingMode: 2
     m_Tags: []
+  m_bHasSetup: 0

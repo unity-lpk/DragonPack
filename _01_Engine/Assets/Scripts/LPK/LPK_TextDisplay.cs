@@ -1,8 +1,8 @@
 ﻿/***************************************************
 File:           LPK_TextDisplay.cs
 Authors:        Christopher Onorati
-Last Updated:   7/30/2019
-Last Version:   2018.3.14
+Last Updated:   11/6/2019
+Last Version:   2019.1.14
 
 Description: 
   This component controls the appearance of a text display
@@ -170,7 +170,7 @@ public class LPK_TextDisplay : LPK_DisplayObject
     {
         if (m_eDisplayMode == DisplayType.COUNTER)
         {
-            string displayText = m_sStartText + string.Format("{0:F" + m_iMaxDecimals + "}", Mathf.Min(_initialValue, _goalValue));
+            string displayText = m_sStartText + string.Format("{0:F" + 0 + "}", Mathf.Min(_initialValue, _goalValue));
             m_cTextMesh.text = displayText;
         }
         else if (m_eDisplayMode == DisplayType.COUNTER_OVER_TOTAL)
@@ -212,7 +212,7 @@ public class LPK_TextDisplay : LPK_DisplayObject
     {
         if (m_eDisplayMode == DisplayType.COUNTER)
         {
-            string displayText = m_sStartText + string.Format("{0:F" + m_iMaxDecimals + "}", Mathf.Min(_initialValue, _goalValue));
+            string displayText = m_sStartText + string.Format("{0:F" + 0 + "}", Mathf.Min(_initialValue, _goalValue));
             m_cText.text = displayText;
         }
         else if (m_eDisplayMode == DisplayType.COUNTER_OVER_TOTAL)

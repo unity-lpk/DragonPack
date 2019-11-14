@@ -1,12 +1,23 @@
 ﻿/***************************************************
 File:           LPK_DynamicPlatformerController.cs
 Authors:        Christopher Onorati
-Last Updated:   10/29/2019
+Last Updated:   11/7/2019
 Last Version:   2019.1.14
 
 Description:
   This component allows for using the keyboard to move a 
-  character by applying velocity to its dynamic RigidBody
+  character by applying velocity to its dynamic RigidBody.
+
+  Good settings for movement:
+
+  Gravity: 10000
+  Dead: 0.9
+  Sensitivity: 1
+  Snap = Yes
+  Invert = No
+  Type = Joystick Axis
+  Axis =  X axis
+  Joy Num = Joystick 2
 
 This script is a basic and generic implementation of its 
 functionality. It is designed for educational purposes and 
@@ -85,7 +96,7 @@ public class LPK_DynamicPlatformerController : LPK_Component
     public LPK_EventSendingInfo m_CharacterJumpEvent;
 
     [Tooltip("Event sent when the character lands.")]
-    public LPK_EventSendingInfo m_CharacterLandEvent;
+    public LPK_CollisionEventSendingInfo m_CharacterLandEvent;
 
     /************************************************************************************/
 
@@ -103,6 +114,9 @@ public class LPK_DynamicPlatformerController : LPK_Component
 
     //Flag to check if the character is grounded.
     bool m_bGrounded = true;
+
+    //Flag to check if the jump key was released for HELD.
+    bool m_bHeldKeyReleased = false;
 
     /************************************************************************************/
 
@@ -141,6 +155,10 @@ public class LPK_DynamicPlatformerController : LPK_Component
             if(m_bPrintDebug)
                 LPK_PrintWarning(this, "Player controller requires either a box or capsule collider for full functionality.");
         }
+
+        //Add feet logic to the controller.
+        if (m_pFeetCollider && m_pFeetCollider.GetComponent<LPK_DynamicPlatformerControllerFeet>() == null)
+            m_pFeetCollider.gameObject.AddComponent<LPK_DynamicPlatformerControllerFeet>();
     }
 
     /**
@@ -285,13 +303,14 @@ public class LPK_DynamicPlatformerController : LPK_Component
         //Resets data on initial button press.
         if(!string.IsNullOrEmpty(m_sJumpButton) && Input.GetButtonDown(m_sJumpButton))
         {
-            if (m_iAirJumpsUsed > m_iMaxAirJumps || (!m_bGrounded && m_iMaxAirJumps < 1))
+            if ((m_iAirJumpsUsed >= m_iMaxAirJumps || (!m_bGrounded && m_iMaxAirJumps < 1)) && m_bIsJumping)
                 return;
 
             if (!m_bGrounded)
                 m_iAirJumpsUsed++;
 
             m_bIsJumping = true;
+            m_bHeldKeyReleased = false;
 
             m_flAirTime = 0.0f;
 
@@ -309,7 +328,7 @@ public class LPK_DynamicPlatformerController : LPK_Component
         }
 
         //Manages actual velocity change.
-        if (!string.IsNullOrEmpty(m_sJumpButton) && Input.GetButton(m_sJumpButton) && m_flAirTime <= m_flMaxAirTime)
+        if (!string.IsNullOrEmpty(m_sJumpButton) && Input.GetButton(m_sJumpButton) && m_flAirTime <= m_flMaxAirTime && !m_bHeldKeyReleased)
         {
             if (m_iAirJumpsUsed > m_iMaxAirJumps)
                 return;
@@ -318,6 +337,10 @@ public class LPK_DynamicPlatformerController : LPK_Component
 
             m_flAirTime += Time.deltaTime;
         }
+
+        //Detect release of held jump button.
+        if (Input.GetButtonUp(m_sJumpButton))
+            m_bHeldKeyReleased = true;
     }
 
     /**
@@ -328,51 +351,15 @@ public class LPK_DynamicPlatformerController : LPK_Component
     **/
     void CheckGroundedFeet()
     {
-        //Trigger check.
-        if (m_pFeetCollider.isTrigger)
-        {
-            ContactFilter2D filter = new ContactFilter2D();
-            filter.layerMask = m_pFeetCollider.gameObject.layer;
-            Collider2D[] colliders = new Collider2D[16];
+        if (m_pFeetCollider.GetComponent<LPK_DynamicPlatformerControllerFeet>() == null)
+            m_bGrounded = false;
 
-            if (m_pFeetCollider.OverlapCollider(filter, colliders) > 0)
-            {
-                for (int i = 0; i < 16; i++)
-                {
-                    if (colliders[i] != null && colliders[i].gameObject != gameObject && !colliders[i].isTrigger)
-                    {
-                        if(!m_bGrounded)
-                            GroundCharacter();
-                        return;
-                    }
-                }
-
-                if(m_bAllowGraceJump && !m_bIsJumping)
-					m_bGrounded = true;
-				else
-                    m_bGrounded = false;
-            }
-
-            return;
-        }
-
-        //NOTENOTE: 16 should be way more than enough.  Increase to detect more colliders but lower performance.
-        ContactPoint2D[] hits = new ContactPoint2D[16];
-        m_pFeetCollider.GetContacts(hits);
-
-        //Go through each contact point to make sure that the character is **ACTUALLY** on the ground.
-        foreach (var d in hits)
-        {
-            if (d.collider != null && d.collider.gameObject != gameObject)
-            {
-                if(!m_bGrounded)
-                    GroundCharacter();
-
-                return;
-            }
-        }
-		
-		m_bGrounded = false;
+        if (m_pFeetCollider.GetComponent<LPK_DynamicPlatformerControllerFeet>().m_iContacts > 0 && !m_bGrounded)
+            GroundCharacter();
+        else if (m_pFeetCollider.GetComponent<LPK_DynamicPlatformerControllerFeet>().m_iContacts > 0)
+            m_bGrounded = true;
+        else
+            m_bGrounded = false;
     }
 
     /**
@@ -383,7 +370,7 @@ public class LPK_DynamicPlatformerController : LPK_Component
     **/
     private void GroundCharacter()
     {
-        DispatchLandEvent();
+        DispatchLandEvent(m_pFeetCollider.GetComponent<LPK_DynamicPlatformerControllerFeet>().m_pFirstHitLand);
 
         //Set grounded flag and reset jumps
         m_bIsJumping = false;
@@ -397,21 +384,23 @@ public class LPK_DynamicPlatformerController : LPK_Component
     /**
     * FUNCTION NAME: DispatchLandEvent
     * DESCRIPTION  : Dispatches the land event.
-    * INPUTS       : None
+    * INPUTS       : GameObject - Ground that was just hit.
     * OUTPUTS      : None
     **/
-    void DispatchLandEvent()
+    void DispatchLandEvent(GameObject _Land)
     {
         if(m_CharacterLandEvent != null)
         {
             if(m_CharacterLandEvent.m_Event != null)
             {
-                if (m_CharacterLandEvent.m_EventSendingMode == LPK_EventSendingInfo.LPK_EventSendingMode.ALL)
+                if (m_CharacterLandEvent.m_EventSendingMode == LPK_CollisionEventSendingInfo.LPK_EventSendingMode.ALL)
                     m_CharacterLandEvent.m_Event.Dispatch(null);
-                else if (m_CharacterLandEvent.m_EventSendingMode == LPK_EventSendingInfo.LPK_EventSendingMode.OWNER)
+                else if (m_CharacterLandEvent.m_EventSendingMode == LPK_CollisionEventSendingInfo.LPK_EventSendingMode.OWNER)
                     m_CharacterLandEvent.m_Event.Dispatch(gameObject);
-                else if (m_CharacterLandEvent.m_EventSendingMode == LPK_EventSendingInfo.LPK_EventSendingMode.TAGS)
+                else if (m_CharacterLandEvent.m_EventSendingMode == LPK_CollisionEventSendingInfo.LPK_EventSendingMode.TAGS)
                     m_CharacterLandEvent.m_Event.Dispatch(gameObject, m_CharacterLandEvent.m_Tags);
+                else if (m_CharacterLandEvent.m_EventSendingMode == LPK_CollisionEventSendingInfo.LPK_EventSendingMode.OTHER)
+                    m_CharacterLandEvent.m_Event.Dispatch(_Land);
 
                 if (m_bPrintDebug)
                     LPK_PrintDebugDispatchingEvent(m_CharacterLandEvent, this, "Character Landing");

@@ -1,8 +1,8 @@
 ﻿/***************************************************
 File:           LPK_GradientColorAnimator.cs
 Authors:        Christopher Onorati
-Last Updated:   10/9/2019
-Last Version:   2019.1.4
+Last Updated:   11/8/2019
+Last Version:   2019.1.5
 
 Description:
   This component can be used to animate color based on a 
@@ -76,10 +76,6 @@ public class LPK_GradientColorAnimator : LPK_Component
     [Tooltip("How long is one animation cycle (in seconds).")]
     [Rename("Duration")]
     public float m_flDuration = 2.0f;
-
-    [Tooltip("How long to wait until the animation begins.")]
-    [Rename("Delay")]
-    public float m_flDelay = 0.0f;
 
     [Header("Event Receiving Info")]
 
@@ -180,7 +176,12 @@ public class LPK_GradientColorAnimator : LPK_Component
             if (m_eMode == LPK_GradientAnimationPlayMode.LOOP)
                 m_flTimer = 0;
             else if (m_eMode == LPK_GradientAnimationPlayMode.PlAY_ONCE)
+            { 
                 m_flTimer = m_flDuration;
+
+                //NOTENOTE:  Generally if we are a play once animation, we want to allow more color changes after the animation has stopped.
+                m_bActive = false;
+            }
             else if (m_eMode == LPK_GradientAnimationPlayMode.PINGPONG)
                 m_flTimer = -m_flDuration;
 
@@ -290,11 +291,15 @@ public class LPK_GradientColorAnimatorEditor : Editor
         EditorGUILayout.LabelField("Component Properties", EditorStyles.boldLabel);
 
         EditorGUILayout.PropertyField(gradient, true);
-        EditorGUILayout.PropertyField(renderProperties, true);
-        EditorGUILayout.PropertyField(mode, true);
-        owner.m_bNeverRestart = EditorGUILayout.Toggle(new GUIContent("Never Restart", "If set, even if another event is received, the gradient will continue on as if nothing happened."), owner.m_bNeverRestart);
         owner.m_flDuration = EditorGUILayout.FloatField(new GUIContent("Duration", "How long is one animation cycle (in seconds)."), owner.m_flDuration);
-        owner.m_flDelay = EditorGUILayout.FloatField(new GUIContent("Delay", "How long to wait until the animation begins."), owner.m_flDelay);
+        EditorGUILayout.PropertyField(mode, true);
+        owner.m_bNeverRestart = EditorGUILayout.Toggle(new GUIContent("Never Restart", "If checked the gradient animation will not restart if it receives an event during its animation."), owner.m_bNeverRestart);
+
+        //Renderers.
+        GUILayout.Space(10);
+        EditorGUILayout.LabelField("Renderers", EditorStyles.boldLabel);
+
+        EditorGUILayout.PropertyField(renderProperties, true);
 
         //Events
         EditorGUILayout.PropertyField(eventTriggers, true);
