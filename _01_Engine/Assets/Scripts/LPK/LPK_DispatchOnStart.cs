@@ -1,7 +1,7 @@
 ﻿/***************************************************
 File:           LPK_DispatchOnStart.cs
 Authors:        Christopher Onorati
-Last Updated:   10/9/2019
+Last Updated:   11/19/2019
 Last Version:   2019.1.4
 
 Description:
@@ -108,7 +108,7 @@ public class LPK_DispatchOnStartEditor : Editor
 
         //Component propertes.
         GUILayout.Space(10);
-        EditorGUILayout.LabelField("Component Properties", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("Event Sending Info", EditorStyles.boldLabel);
 
         //Events.
         EditorGUILayout.PropertyField(m_StartEvent, true);

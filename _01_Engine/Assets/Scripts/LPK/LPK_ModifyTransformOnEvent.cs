@@ -1,7 +1,7 @@
 ﻿/***************************************************
 File:           LPK_ModifyTransformOnEvent.cs
 Authors:        Christopher Onorati
-Last Updated:   8/27/2019
+Last Updated:   11/19/2019
 Last Version:   2019.1.14
 
 Description:
@@ -205,7 +205,7 @@ public class LPK_ModifyTransformOnEvent : LPK_Component
     void ModifyTransformWorld(Transform _modifyGameObject)
     {
         //Modify the Translation property based on the mode selected
-            if (m_TranslateProperties.m_eTranslationModifyMode == LPK_NumericModifyMode.SET)
+        if (m_TranslateProperties.m_eTranslationModifyMode == LPK_NumericModifyMode.SET)
             _modifyGameObject.position = m_TranslateProperties.m_vecTranslationValue;
         else if (m_TranslateProperties.m_eTranslationModifyMode == LPK_NumericModifyMode.ADD)
             _modifyGameObject.position += m_TranslateProperties.m_vecTranslationValue;
@@ -221,7 +221,7 @@ public class LPK_ModifyTransformOnEvent : LPK_Component
         else if (m_TranslateProperties.m_eTranslationModifyMode == LPK_NumericModifyMode.COPY)
         {
             if (m_TranslateProperties.m_pTranslationCopyTarget != null && m_TranslateProperties.m_pTranslationCopyTarget.transform != null)
-                _modifyGameObject.position = m_TranslateProperties.m_pTranslationCopyTarget.transform.position + m_TranslateProperties.m_vecTranslationValue;
+                _modifyGameObject.position = m_TranslateProperties.m_pTranslationCopyTarget.transform.position;
         }
 
         //Modify the Scale property based on the mode selected
@@ -241,7 +241,7 @@ public class LPK_ModifyTransformOnEvent : LPK_Component
         else if (m_ScaleProperties.m_eScaleModifyMode == LPK_NumericModifyMode.COPY)
         {
             if (m_ScaleProperties.m_pScaleCopyTarget != null && m_ScaleProperties.m_pScaleCopyTarget.transform != null)
-                _modifyGameObject.localScale = m_ScaleProperties.m_pScaleCopyTarget.transform.localScale + m_ScaleProperties.m_vecScaleValue;
+                _modifyGameObject.localScale = m_ScaleProperties.m_pScaleCopyTarget.transform.localScale;
         }
 
         //Modify the Rotation property based on the mode selected
@@ -261,7 +261,7 @@ public class LPK_ModifyTransformOnEvent : LPK_Component
         else if (m_RotationProperties.m_eRotateModifyMode == LPK_NumericModifyMode.COPY)
         {
             if (m_RotationProperties.m_pRotateCopyTarget != null && m_RotationProperties.m_pRotateCopyTarget.transform != null)
-                _modifyGameObject.eulerAngles = m_RotationProperties.m_pRotateCopyTarget.transform.eulerAngles + m_RotationProperties.m_vecRotateValue;
+                _modifyGameObject.eulerAngles = m_RotationProperties.m_pRotateCopyTarget.transform.eulerAngles;
         }
     }
 
@@ -290,7 +290,7 @@ public class LPK_ModifyTransformOnEvent : LPK_Component
         else if (m_TranslateProperties.m_eTranslationModifyMode == LPK_NumericModifyMode.COPY)
         {
             if (m_TranslateProperties.m_pTranslationCopyTarget != null && m_TranslateProperties.m_pTranslationCopyTarget.transform != null)
-                _modifyGameObject.localPosition = m_TranslateProperties.m_pTranslationCopyTarget.transform.position + m_TranslateProperties.m_vecTranslationValue;
+                _modifyGameObject.localPosition = m_TranslateProperties.m_pTranslationCopyTarget.transform.position;
 
             if (m_bPrintDebug && m_TranslateProperties.m_pTranslationCopyTarget == null)
                 LPK_PrintWarning(this, "Cannot find a transform copy target.");
@@ -313,7 +313,7 @@ public class LPK_ModifyTransformOnEvent : LPK_Component
         else if (m_ScaleProperties.m_eScaleModifyMode == LPK_NumericModifyMode.COPY)
         {
             if (m_ScaleProperties.m_pScaleCopyTarget != null && m_ScaleProperties.m_pScaleCopyTarget.transform != null)
-                _modifyGameObject.localScale = m_ScaleProperties.m_pScaleCopyTarget.transform.localScale + m_ScaleProperties.m_vecScaleValue;
+                _modifyGameObject.localScale = m_ScaleProperties.m_pScaleCopyTarget.transform.localScale;
 
             if (m_bPrintDebug && m_ScaleProperties.m_pScaleCopyTarget == null)
                 LPK_PrintWarning(this, "Cannot find a scale copy target.");
@@ -336,7 +336,7 @@ public class LPK_ModifyTransformOnEvent : LPK_Component
         else if (m_RotationProperties.m_eRotateModifyMode == LPK_NumericModifyMode.COPY)
         {
             if (m_RotationProperties.m_pRotateCopyTarget != null && m_RotationProperties.m_pRotateCopyTarget.transform != null)
-                _modifyGameObject.localEulerAngles = m_RotationProperties.m_pRotateCopyTarget.transform.eulerAngles + m_RotationProperties.m_vecRotateValue;
+                _modifyGameObject.localEulerAngles = m_RotationProperties.m_pRotateCopyTarget.transform.eulerAngles;
 
             if (m_bPrintDebug && m_RotationProperties.m_pRotateCopyTarget == null)
                 LPK_PrintWarning(this, "Cannot find a rotate copy target.");

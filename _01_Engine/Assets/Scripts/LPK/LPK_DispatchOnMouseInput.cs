@@ -1,7 +1,7 @@
 ﻿/***************************************************
 File:           LPK_DispatchOnMouseInput.cs
 Authors:        Christopher Onorati
-Last Updated:   11/14/2019
+Last Updated:   11/19/2019
 Last Version:   2019.1.14
 
 Description:
@@ -200,12 +200,10 @@ public class LPK_DispatchOnMouseInput : LPK_Component
     **/
     void OnMouseEnter()
     {
+        if (m_eInputMode != LPK_MouseButtons.MOUSE_ENTER_GAME_OBJECT)
+            return;
 
-        if (m_eInputMode == LPK_MouseButtons.MOUSE_ENTER_GAME_OBJECT)
-        {
-          DispatchEvent();
-        }
-        
+        DispatchEvent();
     }
 
     /**
@@ -216,8 +214,10 @@ public class LPK_DispatchOnMouseInput : LPK_Component
     **/
     void OnMouseExit()
     {
-        if (m_eInputMode == LPK_MouseButtons.MOUSE_EXIT_GAME_OBJECT)
-          DispatchEvent();
+        if (m_eInputMode != LPK_MouseButtons.MOUSE_EXIT_GAME_OBJECT)
+            return;
+
+        DispatchEvent();
     }
 
     /**
@@ -228,9 +228,10 @@ public class LPK_DispatchOnMouseInput : LPK_Component
     **/
     void OnMouseOver()
     {
-      
-        if(m_eInputMode == LPK_MouseButtons.MOUSE_STAY_ON_GAME_OBJECT)
-          DispatchEvent();
+        if(m_eInputMode != LPK_MouseButtons.MOUSE_STAY_ON_GAME_OBJECT)
+            return;
+
+        DispatchEvent();
     }
 
     /**
