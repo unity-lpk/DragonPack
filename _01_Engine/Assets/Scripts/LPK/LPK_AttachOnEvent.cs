@@ -1,7 +1,7 @@
 ﻿/***************************************************
 File:           LPK_AttachOnEvent.cs
 Authors:        Christopher Onorati
-Last Updated:   8/1/2019
+Last Updated:   1/1/2020
 Last Version:   2018.3.14
 
 Description:
@@ -84,6 +84,22 @@ public class LPK_AttachOnEvent : LPK_Component
                 m_pChildObject = gameObject;
         }
 
+    }
+
+    /**
+    * FUNCTION NAME: OnEvent
+    * DESCRIPTION  : Event validation.
+    * INPUTS       : _activator - Game object that activated the event.  Null is all objects.
+    * OUTPUTS      : None
+    **/
+    override public void OnEvent(GameObject _activator)
+    {
+        if(!ShouldRespondToEvent(_activator))
+            return;
+
+        if (m_bPrintDebug)
+            LPK_PrintDebugReceiveEvent(m_EventTrigger, this);
+
         if (m_pParentObject == null && !string.IsNullOrEmpty(m_ParentTag))
         {
             m_pParentObject = LPK_MultiTagManager.FindGameObjectWithTag(gameObject, m_ParentTag);
@@ -100,22 +116,7 @@ public class LPK_AttachOnEvent : LPK_Component
             if(LPK_MultiTagManager.FindGameObjectsWithTag(gameObject, m_ChildTag).Count > 1 && m_bPrintDebug)
                 LPK_PrintWarning(this, "WARNNG: Undefined behavior for child selection!  Multiple game objects found with the tag: " + m_ChildTag + 
                                  "Please note that in a build, it is undefined which game object will be selected.");
-        }
-    }
-
-    /**
-    * FUNCTION NAME: OnEvent
-    * DESCRIPTION  : Event validation.
-    * INPUTS       : _activator - Game object that activated the event.  Null is all objects.
-    * OUTPUTS      : None
-    **/
-    override public void OnEvent(GameObject _activator)
-    {
-        if(!ShouldRespondToEvent(_activator))
-            return;
-
-        if (m_bPrintDebug)
-            LPK_PrintDebugReceiveEvent(m_EventTrigger, this);
+        }    
 
         Attach();
     }
