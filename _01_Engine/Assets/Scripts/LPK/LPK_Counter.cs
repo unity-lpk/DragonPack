@@ -1,7 +1,7 @@
 ﻿/***************************************************
 File:           LPK_Counter.cs
 Authors:        Christopher Onorati
-Last Updated:   10/8/2019
+Last Updated:   1/3/2020
 Last Version:   2019.1.4
 
 Description:
@@ -100,6 +100,9 @@ public class LPK_Counter : LPK_Component
     **/
     void Start()
     {
+        //make sure the value can't accidentally be set out of it's own boundaries
+        m_iValue = Mathf.Clamp(m_iValue, m_iMinValue, m_iMaxValue);
+
         if(m_bUpdateDisplayOnStart)
             StartCoroutine(DelayedStart());
     }
